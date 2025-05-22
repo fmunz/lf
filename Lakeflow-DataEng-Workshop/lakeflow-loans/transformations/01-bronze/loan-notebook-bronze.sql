@@ -1,10 +1,10 @@
 -- Databricks notebook source
 -- MAGIC %md-sandbox
--- MAGIC # Simplify ETL with Lakeflow Declarative Pipelines
+-- MAGIC # AI-Powered Data Engineering with Lakeflow
 -- MAGIC
--- MAGIC Declerative Pipelines makes Data Engineering accessible for all. 
+-- MAGIC Declerative Pipelines make Data Engineering accessible for all. 
 -- MAGIC
--- MAGIC <img style="float:right" src="https://github.com/QuentinAmbard/databricks-demo/raw/main/product_demos/dlt-golden-demo-loan-1.png" width="700"/>
+-- MAGIC <img style="float:right" src="https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png" width="700"/>
 -- MAGIC
 -- MAGIC **Accelerate ETL development** <br/>
 -- MAGIC Enable analysts and data engineers to innovate rapidly with simple pipeline development and maintenance 
