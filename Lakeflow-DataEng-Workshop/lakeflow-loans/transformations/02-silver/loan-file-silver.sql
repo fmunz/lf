@@ -26,15 +26,18 @@ CREATE STREAMING TABLE cleaned_new_txs (
 AS SELECT * from STREAM(new_txs);
 
 
-
-
 -- This is the inverse condition of the above statement to quarantine incorrect data for further analysis.
 CREATE STREAMING TABLE quarantine_bad_txs (
   CONSTRAINT `Payments should be this year`  EXPECT (next_payment_date <= date('2020-12-31')),
   CONSTRAINT `Balance should be positive`    EXPECT (balance <= 0 OR arrears_balance <= 0) ON VIOLATION DROP ROW
 )
   COMMENT "Incorrect transactions requiring human analysis"
-AS SELECT * from STREAM(new_txs)
+AS SELECT * from STREAM(new_txs);
 
 
+-- define the historical tx
+CREATE MATERIALIZED VIEW historical_txs
+  COMMENT "Historical loan transactions"
+AS SELECT l.*, ref.accounting_treatment as accounting_treatment FROM raw_historical_loans l
+  INNER JOIN ref_accounting_treatment ref ON l.accounting_treatment_id = ref.id ;
 

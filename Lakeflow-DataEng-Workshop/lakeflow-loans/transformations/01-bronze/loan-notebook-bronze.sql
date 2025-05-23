@@ -72,14 +72,7 @@
 -- DBTITLE 1,Capture new incoming transactions
 CREATE STREAMING TABLE raw_txs
   COMMENT "New raw loan data incrementally ingested from cloud object storage landing zone"
-AS SELECT * FROM cloud_files('/Volumes/demo/loan_io/raw_transactions', 'json', map("cloudFiles.inferColumnTypes", "true"))
-
--- COMMAND ----------
-
--- DBTITLE 1,Reference table - metadata (small & almost static)
-CREATE MATERIALIZED VIEW ref_accounting_treatment
-  COMMENT "Lookup mapping for accounting codes"
-AS SELECT * FROM delta.`/Volumes/demo/loan_io/ref_accounting`
+AS SELECT * FROM cloud_files('/Volumes/demox/loan_io/raw_transactions', 'json', map("cloudFiles.inferColumnTypes", "true"))
 
 -- COMMAND ----------
 
@@ -88,4 +81,11 @@ AS SELECT * FROM delta.`/Volumes/demo/loan_io/ref_accounting`
 CREATE STREAMING TABLE raw_historical_loans
   TBLPROPERTIES ("pipelines.trigger.interval"="6 hour")
   COMMENT "Raw historical transactions"
-AS SELECT * FROM cloud_files('/Volumes/demo/loan_io/historical_loans', 'csv', map("cloudFiles.inferColumnTypes", "true"))
+AS SELECT * FROM cloud_files('/Volumes/demox/loan_io/historical_loans', 'csv', map("cloudFiles.inferColumnTypes", "true"))
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Reference table - metadata (small & almost static)
+CREATE MATERIALIZED VIEW ref_accounting_treatment
+  COMMENT "Lookup mapping for accounting codes"
+AS SELECT * FROM delta.`/Volumes/demox/loan_io/ref_accounting`
