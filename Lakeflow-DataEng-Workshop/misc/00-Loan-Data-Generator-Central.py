@@ -11,13 +11,13 @@
 # MAGIC %sql
 # MAGIC -- the UC commands below set up the environment, they are idempotent, you can rerun the noteook anytime. 
 # MAGIC
-# MAGIC CREATE CATALOG IF NOT EXISTS demox ;
-# MAGIC USE CATALOG demox ;
+# MAGIC CREATE CATALOG IF NOT EXISTS demo ;
+# MAGIC USE CATALOG demo ;
 # MAGIC CREATE SCHEMA IF NOT EXISTS loan_io ;
-# MAGIC USE demox.loan_io ;
+# MAGIC USE demo.loan_io ;
 # MAGIC
 # MAGIC -- needed for keeping things tidy with DLT    
-# MAGIC GRANT CREATE SCHEMA, USE SCHEMA, USE CATALOG on CATALOG demox TO `account users`; 
+# MAGIC GRANT CREATE SCHEMA, USE SCHEMA, USE CATALOG on CATALOG demo TO `account users`; 
 # MAGIC
 # MAGIC DROP VOLUME IF EXISTS historical_loans;
 # MAGIC DROP VOLUME IF EXISTS raw_transactions;
@@ -27,7 +27,7 @@
 # MAGIC CREATE VOLUME ref_accounting;
 # MAGIC
 # MAGIC
-# MAGIC USE CATALOG demox;
+# MAGIC USE CATALOG demo;
 # MAGIC USE SCHEMA loan_io;
 # MAGIC
 # MAGIC GRANT READ VOLUME ON VOLUME historical_loans TO `account users`;
